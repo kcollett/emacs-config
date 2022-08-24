@@ -18,7 +18,7 @@
 (package-initialize)
 
 
-(require 'auto-complete)
+;(require 'auto-complete)
 
 ; install and trigger use-package
 (mapc
@@ -38,9 +38,9 @@
 ; Sets $MANPATH, $PATH and exec-path from your shell, but only on OS X and Linux
 ; (Also tack on GOPATH)
 
-(when (memq window-system '(mac ns x))
-  (exec-path-from-shell-initialize)
-  (exec-path-from-shell-copy-env "GOPATH"))
+;(when (memq window-system '(mac ns x))
+;  (exec-path-from-shell-initialize))
+;  (exec-path-from-shell-copy-env "GOPATH"))
 
 ;; old load-path additions -- retained just in case
 ; (expand-file-name "~/emacs/user-shadow")
@@ -101,12 +101,13 @@
 ;; from eclipse.ini
 ;; -Dorg.eclipse.swt.internal.carbon.smallFonts
 
-;; custom font from https://github.com/source-foundry/Hack
+;; NB: custom font from https://github.com/source-foundry/Hack
+;;     need to download TTF files and double-click to install
 (set-frame-font "Hack 16" t)
+
 (add-to-list 'default-frame-alist '(width . 120))
 (add-to-list 'default-frame-alist '(height . 80))
 
-(load-theme 'alect-black t) ; for now
 
 
 ;; rust support
@@ -125,24 +126,9 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(ansi-color-faces-vector
-   [default default default italic underline success warning error])
- '(compilation-ask-about-save nil)
- '(completion-ignored-extensions
-   '(".o" "~" ".bin" ".lbin" ".so" ".a" ".ln" ".blg" ".bbl" ".elc" ".lof" ".glo" ".idx" ".lot" ".svn/" ".hg/" ".git/" ".bzr/" "CVS/" "_darcs/" "_MTN/" ".fmt" ".tfm" ".class" ".fas" ".lib" ".mem" ".x86f" ".sparcf" ".dfsl" ".pfsl" ".d64fsl" ".p64fsl" ".lx64fsl" ".lx32fsl" ".dx64fsl" ".dx32fsl" ".fx64fsl" ".fx32fsl" ".sx64fsl" ".sx32fsl" ".wx64fsl" ".wx32fsl" ".fasl" ".ufsl" ".fsl" ".dxl" ".lo" ".la" ".gmo" ".mo" ".toc" ".aux" ".cp" ".fn" ".ky" ".pg" ".tp" ".vr" ".cps" ".fns" ".kys" ".pgs" ".tps" ".vrs" ".pyc" ".pyo" ".egg-info/"))
- '(custom-enabled-themes '(alect-black))
- '(custom-safe-themes
-   '("ab04c00a7e48ad784b52f34aa6bfa1e80d0c3fcacc50e1189af3651013eb0d58" "04dd0236a367865e591927a3810f178e8d33c372ad5bfef48b5ce90d4b476481" "59171e7f5270c0f8c28721bb96ae56d35f38a0d86da35eab4001aebbd99271a8" "7153b82e50b6f7452b4519097f880d968a6eaf6f6ef38cc45a144958e553fbc6" default))
- '(indent-tabs-mode nil)
  '(inhibit-startup-screen t)
- '(package-selected-packages
-   '(rust-mode elixir-mode magit evil go-autocomplete zenburn-theme alect-themes atom-one-dark-theme flymake-go flycheck dumb-jump gotest go-direx go-gopath go-eldoc go-add-tags go-stacktracer diminish use-package exec-path-from-shell auto-complete))
- '(ring-bell-function 'ignore)
- '(shell-file-name "/bin/zsh")
- '(shell-popd-regexp "popd\\|po")
- '(shell-pushd-regexp "pushd\\|pu\\|[0-9]")
- '(tool-bar-mode nil)
- '(visible-bell t))
+ '(package-selected-packages '(alect-themes rust-mode use-package diminish))
+ '(tool-bar-mode nil))
 
 
 ;(hide-cstm-set-faces
@@ -167,10 +153,12 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(mode-line ((t (:background "DodgerBlue4" :foreground "#b2af95" :box (:line-width 2 :style released-button)))))
- '(region ((t (:extend t :background "MistyRose2")))))
+ )
 
 (server-start)
+
+;; I *think* this might have to be after the "package-selected-pages" call above
+(load-theme 'alect-black t) ; for now
 
 (provide 'init)
 ;;; init.el ends here
